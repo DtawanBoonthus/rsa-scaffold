@@ -2,7 +2,9 @@
 # Windows PowerShell
 # Usage:  ./rsa-scaffold.ps1 base     |     ./rsa-scaffold.ps1 online
 param([ValidateSet("base","online")][string]$Action = "base")
-$BASE = "Assets/_Project"
+# NOTE: PowerShell variable names are case-insensitive, so this must not
+# collide with the folder-list variables below ($base / $online).
+$Root = "Assets/_Project"
 
 function Mk($paths) {
   foreach ($p in $paths) {
@@ -14,32 +16,32 @@ function Mk($paths) {
 
 # --- base: layers + asset folders ---
 $base = @(
-  "$BASE/Scripts/Foundation/Binding","$BASE/Scripts/Foundation/Pool","$BASE/Scripts/Foundation/Screens",
-  "$BASE/Scripts/Domain/Models","$BASE/Scripts/Domain/Services",
-  "$BASE/Scripts/Domain/Commands","$BASE/Scripts/Domain/Configs",
-  "$BASE/Scripts/Presentation/_Shared","$BASE/Scripts/Presentation/HUD",
-  "$BASE/Scripts/Actors/Player","$BASE/Scripts/Actors/Boss",
-  "$BASE/Scripts/ECS/_Shared/Components","$BASE/Scripts/ECS/_Shared/Systems",
-  "$BASE/Scripts/ECS/Enemy/Components","$BASE/Scripts/ECS/Enemy/Systems","$BASE/Scripts/ECS/Enemy/Authoring",
-  "$BASE/Scripts/ECS/Projectile/Components","$BASE/Scripts/ECS/Projectile/Systems","$BASE/Scripts/ECS/Projectile/Authoring",
-  "$BASE/Scripts/ECS/Bridges",
-  "$BASE/Scripts/Reactors/Audio","$BASE/Scripts/Reactors/Camera",
-  "$BASE/Scripts/Infrastructure/Save","$BASE/Scripts/Infrastructure/Audio","$BASE/Scripts/Infrastructure/Input",
-  "$BASE/Scripts/Bootstrap/EntryPoints",
-  "$BASE/Settings/Rendering","$BASE/Settings/Volumes",
-  "$BASE/Data/Items","$BASE/Data/Enemies","$BASE/Data/Configs",
-  "$BASE/Prefabs/UI","$BASE/Prefabs/Entities","$BASE/Prefabs/Characters",
-  "$BASE/Art/Sprites/UI","$BASE/Art/Fonts",
-  "$BASE/Audio/BGM","$BASE/Audio/SFX",
-  "$BASE/Scenes/SubScenes"
+  "$Root/Scripts/Foundation/Binding","$Root/Scripts/Foundation/Pool","$Root/Scripts/Foundation/Screens",
+  "$Root/Scripts/Domain/Models","$Root/Scripts/Domain/Services",
+  "$Root/Scripts/Domain/Commands","$Root/Scripts/Domain/Configs",
+  "$Root/Scripts/Presentation/_Shared","$Root/Scripts/Presentation/HUD",
+  "$Root/Scripts/Actors/Player","$Root/Scripts/Actors/Boss",
+  "$Root/Scripts/ECS/_Shared/Components","$Root/Scripts/ECS/_Shared/Systems",
+  "$Root/Scripts/ECS/Enemy/Components","$Root/Scripts/ECS/Enemy/Systems","$Root/Scripts/ECS/Enemy/Authoring",
+  "$Root/Scripts/ECS/Projectile/Components","$Root/Scripts/ECS/Projectile/Systems","$Root/Scripts/ECS/Projectile/Authoring",
+  "$Root/Scripts/ECS/Bridges",
+  "$Root/Scripts/Reactors/Audio","$Root/Scripts/Reactors/Camera",
+  "$Root/Scripts/Infrastructure/Save","$Root/Scripts/Infrastructure/Audio","$Root/Scripts/Infrastructure/Input",
+  "$Root/Scripts/Bootstrap/EntryPoints",
+  "$Root/Settings/Rendering","$Root/Settings/Volumes",
+  "$Root/Data/Items","$Root/Data/Enemies","$Root/Data/Configs",
+  "$Root/Prefabs/UI","$Root/Prefabs/Entities","$Root/Prefabs/Characters",
+  "$Root/Art/Sprites/UI","$Root/Art/Fonts",
+  "$Root/Audio/BGM","$Root/Audio/SFX",
+  "$Root/Scenes/SubScenes"
 )
 # --- online: Network module (removable) ---
 $online = @(
-  "$BASE/Scripts/Network/Session","$BASE/Scripts/Network/Bridges",
-  "$BASE/Scripts/Network/Entities","$BASE/Scripts/Network/Protocol",
-  "$BASE/Scripts/Network/Transport",
-  "$BASE/Scripts/Network/Presentation/Lobby","$BASE/Scripts/Network/Presentation/Chat",
-  "$BASE/Scripts/Network/Bootstrap"
+  "$Root/Scripts/Network/Session","$Root/Scripts/Network/Bridges",
+  "$Root/Scripts/Network/Entities","$Root/Scripts/Network/Protocol",
+  "$Root/Scripts/Network/Transport",
+  "$Root/Scripts/Network/Presentation/Lobby","$Root/Scripts/Network/Presentation/Chat",
+  "$Root/Scripts/Network/Bootstrap"
 )
 
 Mk $base
