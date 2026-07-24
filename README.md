@@ -51,8 +51,6 @@ curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rs
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.ps1))) online
 ```
 
-Both URLs point at the `v1.0` tag, so the script you run today is exactly the script you get next month. To move to a newer version, replace `v1.0` with a later tag from the [releases](https://github.com/DtawanBoonthus/rsa-scaffold/tags).
-
 ### Install as a permanent command
 
 ```bash

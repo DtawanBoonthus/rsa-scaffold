@@ -51,8 +51,6 @@ curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rs
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.ps1))) online
 ```
 
-ทั้งสอง URL ชี้ที่ tag `v1.0` — สคริปต์ที่รันวันนี้กับเดือนหน้าจะเป็นตัวเดียวกันเสมอ ถ้าอยากอัปเป็นเวอร์ชันใหม่ เปลี่ยน `v1.0` เป็น tag ที่ใหม่กว่าได้จาก [หน้า tags](https://github.com/DtawanBoonthus/rsa-scaffold/tags)
-
 ### ติดตั้งเป็น command ถาวร (เรียกสั้นๆ)
 
 ```bash
