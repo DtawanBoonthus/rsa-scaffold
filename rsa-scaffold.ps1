@@ -9,8 +9,6 @@ $Root = "Assets/_Project"
 function Mk($paths) {
   foreach ($p in $paths) {
     New-Item -ItemType Directory -Force -Path $p | Out-Null
-    $keep = Join-Path $p ".gitkeep"
-    if (-not (Test-Path $keep)) { New-Item -ItemType File -Path $keep | Out-Null }
   }
 }
 

@@ -6,7 +6,7 @@ set -e
 BASE="Assets/_Project"
 ACTION="${1:-base}"
 
-mk() { for d in "$@"; do mkdir -p "$d" && : > "$d/.gitkeep"; done; }
+mk() { for d in "$@"; do mkdir -p "$d"; done; }
 
 add_base() {
   # --- Scripts (organized by layer) ---

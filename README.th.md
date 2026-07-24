@@ -35,7 +35,7 @@ bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
 
 รันในโฟลเดอร์รากของโปรเจกต์ Unity (ที่มีโฟลเดอร์ `Assets/` อยู่) — สคริปต์จะสร้างทุกอย่างใต้ `Assets/_Project/`
 
-> สร้าง `.gitkeep` ให้ทุก folder เพื่อ commit folder ว่างขึ้น git ได้ · รันซ้ำได้ปลอดภัย (idempotent) ไม่ทับไฟล์เดิม
+> สร้างแค่โฟลเดอร์ ไม่มีไฟล์ placeholder · รันซ้ำได้ปลอดภัย (idempotent) ไม่ทับโฟลเดอร์/ไฟล์เดิม · หมายเหตุ: git ไม่ track โฟลเดอร์ว่าง โฟลเดอร์จะยังไม่ขึ้น git จนกว่าจะมีไฟล์ข้างใน
 
 ---
 
