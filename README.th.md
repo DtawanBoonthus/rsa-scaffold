@@ -43,19 +43,19 @@ bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
 
 **Mac / Linux / Git Bash:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.sh | bash -s -- online
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- online
 ```
 
 **Windows PowerShell:**
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.ps1))) online
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) online
 ```
 
 ### ติดตั้งเป็น command ถาวร (เรียกสั้นๆ)
 
 ```bash
 mkdir -p ~/bin
-curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.sh -o ~/bin/rsa-scaffold
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh -o ~/bin/rsa-scaffold
 chmod +x ~/bin/rsa-scaffold
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
