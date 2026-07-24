@@ -39,25 +39,25 @@ bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
 
 ---
 
-## เรียกผ่าน CLI จาก git (ไม่ต้องโหลดไฟล์)
+## เรียกจาก command line ได้เลย (ไม่ต้องโหลดไฟล์)
 
-หลัง push repo นี้ขึ้น GitHub แล้ว เรียก raw URL ได้เลย:
-
+**Mac / Linux / Git Bash:**
 ```bash
-# pin เป็น tag (เช่น v1.0) แทน main จะนิ่ง/ปลอดภัยกว่า
-curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.sh | bash -s -- online
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.sh | bash -s -- online
 ```
 
 **Windows PowerShell:**
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.ps1))) online
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.ps1))) online
 ```
+
+ทั้งสอง URL ชี้ที่ tag `v1.0` — สคริปต์ที่รันวันนี้กับเดือนหน้าจะเป็นตัวเดียวกันเสมอ ถ้าอยากอัปเป็นเวอร์ชันใหม่ เปลี่ยน `v1.0` เป็น tag ที่ใหม่กว่าได้จาก [หน้า tags](https://github.com/DtawanBoonthus/rsa-scaffold/tags)
 
 ### ติดตั้งเป็น command ถาวร (เรียกสั้นๆ)
 
 ```bash
 mkdir -p ~/bin
-curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.sh -o ~/bin/rsa-scaffold
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.sh -o ~/bin/rsa-scaffold
 chmod +x ~/bin/rsa-scaffold
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```

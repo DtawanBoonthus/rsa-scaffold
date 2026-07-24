@@ -39,25 +39,25 @@ Run it from the Unity project root (the folder containing `Assets/`). Everything
 
 ---
 
-## Run via CLI from git (no download)
+## Run straight from the command line (nothing to download)
 
-Once this repo is on GitHub, call the raw URL directly:
-
+**macOS / Linux / Git Bash:**
 ```bash
-# pin a tag (e.g. v1.0) instead of main for stability/safety
-curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.sh | bash -s -- online
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.sh | bash -s -- online
 ```
 
 **Windows PowerShell:**
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.ps1))) online
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.ps1))) online
 ```
+
+Both URLs point at the `v1.0` tag, so the script you run today is exactly the script you get next month. To move to a newer version, replace `v1.0` with a later tag from the [releases](https://github.com/DtawanBoonthus/rsa-scaffold/tags).
 
 ### Install as a permanent command
 
 ```bash
 mkdir -p ~/bin
-curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.sh -o ~/bin/rsa-scaffold
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/v1.0/rsa-scaffold.sh -o ~/bin/rsa-scaffold
 chmod +x ~/bin/rsa-scaffold
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
