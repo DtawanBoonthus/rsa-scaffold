@@ -42,20 +42,20 @@ bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
 หลัง push repo นี้ขึ้น GitHub แล้ว เรียก raw URL ได้เลย:
 
 ```bash
-# แทน <org>/rsa-scaffold ด้วย repo จริง · pin เป็น tag (เช่น v1.0) แทน main จะปลอดภัยกว่า
-curl -fsSL https://raw.githubusercontent.com/<org>/rsa-scaffold/main/rsa-scaffold.sh | bash -s -- online
+# pin เป็น tag (เช่น v1.0) แทน main จะนิ่ง/ปลอดภัยกว่า
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.sh | bash -s -- online
 ```
 
 **Windows PowerShell:**
 ```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/<org>/rsa-scaffold/main/rsa-scaffold.ps1))) online
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.ps1))) online
 ```
 
 ### ติดตั้งเป็น command ถาวร (เรียกสั้นๆ)
 
 ```bash
 mkdir -p ~/bin
-curl -fsSL https://raw.githubusercontent.com/<org>/rsa-scaffold/main/rsa-scaffold.sh -o ~/bin/rsa-scaffold
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.sh -o ~/bin/rsa-scaffold
 chmod +x ~/bin/rsa-scaffold
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
