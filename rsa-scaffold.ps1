@@ -1,6 +1,6 @@
-# rsa-scaffold.ps1 — สร้างโครง folder ของ Reactive-Simulation Architecture (RSA)
+# rsa-scaffold.ps1 — generate the Reactive-Simulation Architecture (RSA) folder structure
 # Windows PowerShell
-# ใช้:  ./rsa-scaffold.ps1 base     |     ./rsa-scaffold.ps1 online
+# Usage:  ./rsa-scaffold.ps1 base     |     ./rsa-scaffold.ps1 online
 param([ValidateSet("base","online")][string]$Action = "base")
 $BASE = "Assets/_Project"
 
@@ -12,6 +12,7 @@ function Mk($paths) {
   }
 }
 
+# --- base: layers + asset folders ---
 $base = @(
   "$BASE/Scripts/Foundation/Binding","$BASE/Scripts/Foundation/Pool","$BASE/Scripts/Foundation/Screens",
   "$BASE/Scripts/Domain/Models","$BASE/Scripts/Domain/Services",
@@ -32,6 +33,7 @@ $base = @(
   "$BASE/Audio/BGM","$BASE/Audio/SFX",
   "$BASE/Scenes/SubScenes"
 )
+# --- online: Network module (removable) ---
 $online = @(
   "$BASE/Scripts/Network/Session","$BASE/Scripts/Network/Bridges",
   "$BASE/Scripts/Network/Entities","$BASE/Scripts/Network/Protocol",

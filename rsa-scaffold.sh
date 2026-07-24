@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# rsa-scaffold.sh — สร้างโครง folder ของ Reactive-Simulation Architecture (RSA)
-# Mac / Linux / Git Bash (Windows)
-# ใช้:  bash rsa-scaffold.sh base     |     bash rsa-scaffold.sh online
+# rsa-scaffold.sh — generate the Reactive-Simulation Architecture (RSA) folder structure
+# macOS / Linux / Git Bash (Windows)
+# Usage:  bash rsa-scaffold.sh base     |     bash rsa-scaffold.sh online
 set -e
 BASE="Assets/_Project"
 ACTION="${1:-base}"
@@ -9,7 +9,7 @@ ACTION="${1:-base}"
 mk() { for d in "$@"; do mkdir -p "$d" && : > "$d/.gitkeep"; done; }
 
 add_base() {
-  # --- Scripts (แยกตาม Layer) ---
+  # --- Scripts (organized by layer) ---
   mk \
     "$BASE/Scripts/Foundation/Binding" "$BASE/Scripts/Foundation/Pool" "$BASE/Scripts/Foundation/Screens" \
     "$BASE/Scripts/Domain/Models" "$BASE/Scripts/Domain/Services" \
@@ -23,7 +23,7 @@ add_base() {
     "$BASE/Scripts/Reactors/Audio" "$BASE/Scripts/Reactors/Camera" \
     "$BASE/Scripts/Infrastructure/Save" "$BASE/Scripts/Infrastructure/Audio" "$BASE/Scripts/Infrastructure/Input" \
     "$BASE/Scripts/Bootstrap/EntryPoints"
-  # --- Asset folders (แยกจาก code) ---
+  # --- Asset folders (kept out of Scripts/) ---
   mk \
     "$BASE/Settings/Rendering" "$BASE/Settings/Volumes" \
     "$BASE/Data/Items" "$BASE/Data/Enemies" "$BASE/Data/Configs" \
@@ -35,7 +35,7 @@ add_base() {
 }
 
 add_online() {
-  # --- โมดูล Network (ถอดออกได้) ---
+  # --- Network module (removable) ---
   mk \
     "$BASE/Scripts/Network/Session" "$BASE/Scripts/Network/Bridges" \
     "$BASE/Scripts/Network/Entities" "$BASE/Scripts/Network/Protocol" \

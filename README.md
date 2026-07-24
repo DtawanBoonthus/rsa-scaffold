@@ -1,28 +1,30 @@
 # rsa-scaffold
 
-สร้างโครง folder ของ **Reactive-Simulation Architecture (RSA)** สำหรับโปรเจกต์ Unity ด้วยคำสั่งเดียว — ไม่ต้องนั่งสร้าง folder ทีละอันตอนเริ่มโปรเจกต์ใหม่
+**English** | [ไทย](README.th.md)
+
+Generate the **Reactive-Simulation Architecture (RSA)** folder structure for a Unity project with a single command — no more creating folders one by one when starting a new project.
 
 ---
 
-## RSA คืออะไร
+## What is RSA
 
-Architecture สำหรับเกม Unity ที่ใช้ **Layered + MVVM + Mediator (VitalRouter)** โดยแยกโค้ดตาม **2 execution model**:
+A Unity game architecture built on **Layered + MVVM + Mediator (VitalRouter)**, splitting code by **two execution models**:
 
-| ฝั่ง | ทำงานแบบ | อยู่ที่ |
+| Side | How it runs | Lives in |
 |---|---|---|
-| **Reactive** (UI, เมนู, คะแนน) | รอ input แล้วตอบ | `Presentation/`, `Domain/` |
-| **Simulation** (ศัตรู, กระสุน, ตัวละคร) | รันเองทุกเฟรม | `Actors/`, `ECS/` |
+| **Reactive** (UI, menus, score) | waits for input, then responds | `Presentation/`, `Domain/` |
+| **Simulation** (enemies, bullets, characters) | runs every frame on its own | `Actors/`, `ECS/` |
 
-สองฝั่งไม่เรียกกันตรงๆ — คุยผ่าน **Mediator (VitalRouter)** จุดเดียว · ข้ามจาก ECS มาฝั่ง managed ผ่านตัวแปลง **Bridge** (`SystemBase`) · `Network/` เป็นโมดูลถอดออกได้ (offline-first)
+The two sides never call each other directly — they talk through a single **Mediator (VitalRouter)**. Crossing from ECS to the managed side goes through a **Bridge** (`SystemBase`). `Network/` is a removable module (offline-first).
 
 ---
 
-## วิธีใช้
+## Usage
 
 ```bash
-# Mac / Linux / Git Bash
-bash rsa-scaffold.sh base       # โครง offline ครบ
-bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
+# macOS / Linux / Git Bash
+bash rsa-scaffold.sh base       # full offline structure
+bash rsa-scaffold.sh online     # base + Network module (multiplayer)
 ```
 
 ```powershell
@@ -31,18 +33,18 @@ bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
 ./rsa-scaffold.ps1 online
 ```
 
-รันในโฟลเดอร์รากของโปรเจกต์ Unity (ที่มีโฟลเดอร์ `Assets/` อยู่) — สคริปต์จะสร้างทุกอย่างใต้ `Assets/_Project/`
+Run it from the Unity project root (the folder containing `Assets/`). Everything is created under `Assets/_Project/`.
 
-> สร้าง `.gitkeep` ให้ทุก folder เพื่อ commit folder ว่างขึ้น git ได้ · รันซ้ำได้ปลอดภัย (idempotent) ไม่ทับไฟล์เดิม
+> A `.gitkeep` is placed in every folder so empty folders can be committed. Safe to re-run (idempotent) — it never overwrites existing files.
 
 ---
 
-## เรียกผ่าน CLI จาก git (ไม่ต้องโหลดไฟล์)
+## Run via CLI from git (no download)
 
-หลัง push repo นี้ขึ้น GitHub แล้ว เรียก raw URL ได้เลย:
+Once this repo is on GitHub, call the raw URL directly:
 
 ```bash
-# pin เป็น tag (เช่น v1.0) แทน main จะนิ่ง/ปลอดภัยกว่า
+# pin a tag (e.g. v1.0) instead of main for stability/safety
 curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.sh | bash -s -- online
 ```
 
@@ -51,7 +53,7 @@ curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rs
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/main/rsa-scaffold.ps1))) online
 ```
 
-### ติดตั้งเป็น command ถาวร (เรียกสั้นๆ)
+### Install as a permanent command
 
 ```bash
 mkdir -p ~/bin
@@ -60,27 +62,27 @@ chmod +x ~/bin/rsa-scaffold
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
 
-จากนั้นในโปรเจกต์ไหนก็:
+Then, in any project:
 ```bash
 rsa-scaffold online
 ```
 
 ---
 
-## โครงที่สร้าง
+## Generated structure
 
 ```text
 Assets/_Project/
 ├── Scripts/
-│   ├── Foundation/     เครื่องมือ generic ไม่รู้จักเกม (Pool, ScreenManager)
-│   ├── Domain/         business logic — Pure C# เทสได้ (Models/Services/Commands/Configs)
-│   ├── Presentation/   [Reactive] UI แบบ MVVM (ViewModel + View)
-│   ├── Actors/         [Simulation] gameplay Mono ตัวน้อย (Player, Boss)
-│   ├── ECS/            [Simulation] gameplay ตัวเยอะ (Enemy/Projectile + Bridges)
-│   ├── Reactors/       รับ event ทำ side effect (Audio, Camera)
-│   ├── Infrastructure/ ติดต่อโลกนอก (Save, Audio, Input)
+│   ├── Foundation/     generic engine tools, game-agnostic (Pool, ScreenManager)
+│   ├── Domain/         business logic — Pure C#, testable (Models/Services/Commands/Configs)
+│   ├── Presentation/   [Reactive] MVVM UI (ViewModel + View)
+│   ├── Actors/         [Simulation] MonoBehaviour gameplay, few entities (Player, Boss)
+│   ├── ECS/            [Simulation] data-oriented gameplay (Enemy/Projectile + Bridges)
+│   ├── Reactors/       react to events with side effects (Audio, Camera)
+│   ├── Infrastructure/ talk to the outside world (Save, Audio, Input)
 │   ├── Bootstrap/      DI registration + wiring
-│   └── Network/        โมดูล online ถอดได้ (เฉพาะ online) — Session/Bridges/Entities/Protocol/Transport
+│   └── Network/        removable online module (online only) — Session/Bridges/Entities/Protocol/Transport
 ├── Settings/           Rendering / Volumes (URP)
 ├── Data/               ScriptableObject instances (.asset)
 ├── Prefabs/            UI / Entities / Characters
@@ -89,20 +91,20 @@ Assets/_Project/
 └── Scenes/             + SubScenes/ (ECS bake target)
 ```
 
-| Action | สร้าง |
+| Action | Creates |
 |---|---|
-| `base` | โครง offline ทั้งหมด (ไม่มี `Network/`) |
-| `online` | `base` + โมดูล `Network/` สำหรับ multiplayer |
+| `base` | full offline structure (no `Network/`) |
+| `online` | `base` + the `Network/` module for multiplayer |
 
 ---
 
-## กฎเหล็กของ RSA
+## RSA core rules
 
-1. `Domain/` เป็น Pure C# — ห้าม reference `UnityEngine.UI` / `Unity.Entities`
-2. `ECS/` มี asmdef แยก ไม่ reference R3/VitalRouter/UI → Burst-safe
-3. ข้าม ECS → managed ต้องผ่าน `ECS/Bridges/` (asmdef `_Project.ECS.Bridges`) เท่านั้น
-4. `interface` อยู่ `Domain/` · impl ที่ผูก engine อยู่ `Infrastructure/` หรือ `Network/`
-5. `using FishNet` (หรือ networking lib) ได้เฉพาะใน `Network/` · ไม่มีใครพึ่ง `Network/` กลับ → ถอดได้
-6. Code (`.cs`) แยกจาก Asset (`.asset`/prefab/`.uxml`)
+1. `Domain/` is Pure C# — never reference `UnityEngine.UI` / `Unity.Entities`
+2. `ECS/` has its own asmdef with no R3/VitalRouter/UI → Burst-safe
+3. Crossing ECS → managed must go through `ECS/Bridges/` (asmdef `_Project.ECS.Bridges`) only
+4. `interface` lives in `Domain/`; engine-bound implementations live in `Infrastructure/` or `Network/`
+5. `using FishNet` (or any networking lib) is allowed only inside `Network/`; nothing depends back on `Network/` → it stays removable
+6. Code (`.cs`) is separated from assets (`.asset` / prefab / `.uxml`)
 
-> โครงนี้สร้างแค่ *folder* — ตัว `.asmdef` ต้องเพิ่มเองตามกฎด้านบน
+> This tool creates folders only — add the `.asmdef` files yourself per the rules above.
