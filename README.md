@@ -35,6 +35,14 @@ bash rsa-scaffold.sh online     # base + Network module (multiplayer)
 
 Run it from the Unity project root (the folder containing `Assets/`). Everything is created under `Assets/_Project/`.
 
+The script figures out where it is, so you can also run it from inside `Assets/` or `Assets/_Project/` — it will not create a nested `Assets/Assets/`:
+
+| Run from | Creates in |
+|---|---|
+| project root | `Assets/_Project/` |
+| `Assets/` | `_Project/` |
+| `Assets/_Project/` | the current folder |
+
 > Only folders are created — no placeholder files. Safe to re-run (idempotent): existing folders and files are left untouched. Note that git does not track empty folders, so a folder stays out of version control until you put something in it.
 
 ---
@@ -76,7 +84,7 @@ Assets/_Project/
 │   ├── Domain/         business logic — Pure C#, testable (Models/Services/Commands/Configs)
 │   ├── Presentation/   [Reactive] MVVM UI (ViewModel + View)
 │   ├── Actors/         [Simulation] MonoBehaviour gameplay, few entities (Player, Boss)
-│   ├── ECS/            [Simulation] data-oriented gameplay (Enemy/Projectile + Bridges)
+│   ├── ECS/            [Simulation] data-oriented gameplay (_Shared + Bridges)
 │   ├── Reactors/       react to events with side effects (Audio, Camera)
 │   ├── Infrastructure/ talk to the outside world (Save, Audio, Input)
 │   ├── Bootstrap/      DI registration + wiring

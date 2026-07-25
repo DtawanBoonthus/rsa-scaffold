@@ -35,6 +35,14 @@ bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
 
 รันในโฟลเดอร์รากของโปรเจกต์ Unity (ที่มีโฟลเดอร์ `Assets/` อยู่) — สคริปต์จะสร้างทุกอย่างใต้ `Assets/_Project/`
 
+สคริปต์ดูให้เองว่าตอนนี้อยู่โฟลเดอร์ไหน จะรันจากใน `Assets/` หรือ `Assets/_Project/` ก็ได้ ไม่สร้าง `Assets/Assets/` ซ้อนกัน:
+
+| รันจาก | สร้างลงที่ |
+|---|---|
+| รากโปรเจกต์ | `Assets/_Project/` |
+| `Assets/` | `_Project/` |
+| `Assets/_Project/` | โฟลเดอร์ปัจจุบัน |
+
 > สร้างแค่โฟลเดอร์ ไม่มีไฟล์ placeholder · รันซ้ำได้ปลอดภัย (idempotent) ไม่ทับโฟลเดอร์/ไฟล์เดิม · หมายเหตุ: git ไม่ track โฟลเดอร์ว่าง โฟลเดอร์จะยังไม่ขึ้น git จนกว่าจะมีไฟล์ข้างใน
 
 ---
@@ -76,7 +84,7 @@ Assets/_Project/
 │   ├── Domain/         business logic — Pure C# เทสได้ (Models/Services/Commands/Configs)
 │   ├── Presentation/   [Reactive] UI แบบ MVVM (ViewModel + View)
 │   ├── Actors/         [Simulation] gameplay Mono ตัวน้อย (Player, Boss)
-│   ├── ECS/            [Simulation] gameplay ตัวเยอะ (Enemy/Projectile + Bridges)
+│   ├── ECS/            [Simulation] gameplay ตัวเยอะ (_Shared + Bridges)
 │   ├── Reactors/       รับ event ทำ side effect (Audio, Camera)
 │   ├── Infrastructure/ ติดต่อโลกนอก (Save, Audio, Input)
 │   ├── Bootstrap/      DI registration + wiring

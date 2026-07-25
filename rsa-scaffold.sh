@@ -3,10 +3,36 @@
 # macOS / Linux / Git Bash (Windows)
 # Usage:  bash rsa-scaffold.sh base     |     bash rsa-scaffold.sh online
 set -e
-BASE="Assets/_Project"
 ACTION="${1:-base}"
 
-mk() { for d in "$@"; do mkdir -p "$d"; done; }
+# Work out where "Assets/_Project" should go, based on where the script is run from,
+# so running inside Assets/ does not create a nested Assets/Assets/.
+CWD="$(pwd)"
+LEAF="$(basename "$CWD")"
+PARENT_LEAF="$(basename "$(dirname "$CWD")")"
+
+if [ "$LEAF" = "_Project" ] && [ "$PARENT_LEAF" = "Assets" ]; then
+  BASE="."                  # already inside Assets/_Project
+elif [ "$LEAF" = "Assets" ]; then
+  BASE="_Project"           # inside Assets/
+else
+  BASE="Assets/_Project"    # Unity project root
+fi
+
+CREATED=0
+SKIPPED=0
+
+# create a folder only when it does not exist yet — existing folders are left untouched
+mk() {
+  for d in "$@"; do
+    if [ -d "$d" ]; then
+      SKIPPED=$((SKIPPED + 1))
+    else
+      mkdir -p "$d"
+      CREATED=$((CREATED + 1))
+    fi
+  done
+}
 
 add_base() {
   # --- Scripts (organized by layer) ---
@@ -17,8 +43,6 @@ add_base() {
     "$BASE/Scripts/Presentation/_Shared" "$BASE/Scripts/Presentation/HUD" \
     "$BASE/Scripts/Actors/Player" "$BASE/Scripts/Actors/Boss" \
     "$BASE/Scripts/ECS/_Shared/Components" "$BASE/Scripts/ECS/_Shared/Systems" \
-    "$BASE/Scripts/ECS/Enemy/Components" "$BASE/Scripts/ECS/Enemy/Systems" "$BASE/Scripts/ECS/Enemy/Authoring" \
-    "$BASE/Scripts/ECS/Projectile/Components" "$BASE/Scripts/ECS/Projectile/Systems" "$BASE/Scripts/ECS/Projectile/Authoring" \
     "$BASE/Scripts/ECS/Bridges" \
     "$BASE/Scripts/Reactors/Audio" "$BASE/Scripts/Reactors/Camera" \
     "$BASE/Scripts/Infrastructure/Save" "$BASE/Scripts/Infrastructure/Audio" "$BASE/Scripts/Infrastructure/Input" \
@@ -50,3 +74,5 @@ case "$ACTION" in
   online) add_base; add_online ;;
   *) echo "Usage: bash rsa-scaffold.sh [base|online]"; exit 1 ;;
 esac
+
+echo "    $CREATED created, $SKIPPED skipped (already exists)  ->  $BASE/"
