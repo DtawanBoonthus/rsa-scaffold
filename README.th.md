@@ -21,15 +21,23 @@ Architecture สำหรับเกม Unity ที่ใช้ **Layered + MV
 
 ## วิธีใช้
 
+**Mac / Linux / Git Bash** — offline (โครง base ครบ):
 ```bash
-# Mac / Linux / Git Bash
-bash rsa-scaffold.sh base       # โครง offline ครบ
-bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
+bash rsa-scaffold.sh base
 ```
 
+**Mac / Linux / Git Bash** — online (base + โมดูล Network):
+```bash
+bash rsa-scaffold.sh online
+```
+
+**Windows PowerShell** — offline (โครง base ครบ):
 ```powershell
-# Windows PowerShell
 ./rsa-scaffold.ps1 base
+```
+
+**Windows PowerShell** — online (base + โมดูล Network):
+```powershell
 ./rsa-scaffold.ps1 online
 ```
 
@@ -49,21 +57,23 @@ bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
 
 ## เรียกจาก command line ได้เลย (ไม่ต้องโหลดไฟล์)
 
-**Mac / Linux / Git Bash:**
+**Mac / Linux / Git Bash** — offline:
 ```bash
-# offline — โครง base อย่างเดียว
 curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- base
+```
 
-# online — base + โมดูล Network
+**Mac / Linux / Git Bash** — online:
+```bash
 curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- online
 ```
 
-**Windows PowerShell:**
+**Windows PowerShell** — offline:
 ```powershell
-# offline — โครง base อย่างเดียว
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) base
+```
 
-# online — base + โมดูล Network
+**Windows PowerShell** — online:
+```powershell
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) online
 ```
 
@@ -76,10 +86,14 @@ chmod +x ~/bin/rsa-scaffold
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
 
-จากนั้นในโปรเจกต์ไหนก็:
+จากนั้นในโปรเจกต์ไหนก็ — offline:
 ```bash
-rsa-scaffold base       # offline
-rsa-scaffold online     # base + โมดูล Network
+rsa-scaffold base
+```
+
+หรือ online:
+```bash
+rsa-scaffold online
 ```
 
 ---

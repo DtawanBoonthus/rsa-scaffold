@@ -21,15 +21,23 @@ The two sides never call each other directly — they talk through a single **Me
 
 ## Usage
 
+**macOS / Linux / Git Bash** — offline (full base structure):
 ```bash
-# macOS / Linux / Git Bash
-bash rsa-scaffold.sh base       # full offline structure
-bash rsa-scaffold.sh online     # base + Network module (multiplayer)
+bash rsa-scaffold.sh base
 ```
 
+**macOS / Linux / Git Bash** — online (base + Network module):
+```bash
+bash rsa-scaffold.sh online
+```
+
+**Windows PowerShell** — offline (full base structure):
 ```powershell
-# Windows PowerShell
 ./rsa-scaffold.ps1 base
+```
+
+**Windows PowerShell** — online (base + Network module):
+```powershell
 ./rsa-scaffold.ps1 online
 ```
 
@@ -49,21 +57,23 @@ The script figures out where it is, so you can also run it from inside `Assets/`
 
 ## Run straight from the command line (nothing to download)
 
-**macOS / Linux / Git Bash:**
+**macOS / Linux / Git Bash** — offline:
 ```bash
-# offline — base structure only
 curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- base
+```
 
-# online — base + Network module
+**macOS / Linux / Git Bash** — online:
+```bash
 curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- online
 ```
 
-**Windows PowerShell:**
+**Windows PowerShell** — offline:
 ```powershell
-# offline — base structure only
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) base
+```
 
-# online — base + Network module
+**Windows PowerShell** — online:
+```powershell
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) online
 ```
 
@@ -76,10 +86,14 @@ chmod +x ~/bin/rsa-scaffold
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
 
-Then, in any project:
+Then, in any project — offline:
 ```bash
-rsa-scaffold base       # offline
-rsa-scaffold online     # base + Network module
+rsa-scaffold base
+```
+
+Or online:
+```bash
+rsa-scaffold online
 ```
 
 ---
