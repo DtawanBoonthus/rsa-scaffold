@@ -51,11 +51,19 @@ The script figures out where it is, so you can also run it from inside `Assets/`
 
 **macOS / Linux / Git Bash:**
 ```bash
+# offline — base structure only
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- base
+
+# online — base + Network module
 curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- online
 ```
 
 **Windows PowerShell:**
 ```powershell
+# offline — base structure only
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) base
+
+# online — base + Network module
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) online
 ```
 
@@ -70,7 +78,8 @@ echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 
 Then, in any project:
 ```bash
-rsa-scaffold online
+rsa-scaffold base       # offline
+rsa-scaffold online     # base + Network module
 ```
 
 ---

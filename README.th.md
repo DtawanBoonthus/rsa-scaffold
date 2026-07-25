@@ -51,11 +51,19 @@ bash rsa-scaffold.sh online     # base + โมดูล Network (multiplayer)
 
 **Mac / Linux / Git Bash:**
 ```bash
+# offline — โครง base อย่างเดียว
+curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- base
+
+# online — base + โมดูล Network
 curl -fsSL https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.sh | bash -s -- online
 ```
 
 **Windows PowerShell:**
 ```powershell
+# offline — โครง base อย่างเดียว
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) base
+
+# online — base + โมดูล Network
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/DtawanBoonthus/rsa-scaffold/1.0.0/rsa-scaffold.ps1))) online
 ```
 
@@ -70,7 +78,8 @@ echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 
 จากนั้นในโปรเจกต์ไหนก็:
 ```bash
-rsa-scaffold online
+rsa-scaffold base       # offline
+rsa-scaffold online     # base + โมดูล Network
 ```
 
 ---
