@@ -48,7 +48,7 @@ $base = @(
   "$Root/Audio/BGM","$Root/Audio/SFX",
   "$Root/Scenes/SubScenes"
 )
-# --- online: Network module (removable) ---
+# --- online: Network module (swappable netcode impl) ---
 $online = @(
   "$Root/Scripts/Network/Session","$Root/Scripts/Network/Bridges",
   "$Root/Scripts/Network/Entities","$Root/Scripts/Network/Protocol",

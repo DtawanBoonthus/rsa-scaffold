@@ -59,7 +59,7 @@ add_base() {
 }
 
 add_online() {
-  # --- Network module (removable) ---
+  # --- Network module (swappable netcode impl) ---
   mk \
     "$BASE/Scripts/Network/Session" "$BASE/Scripts/Network/Bridges" \
     "$BASE/Scripts/Network/Entities" "$BASE/Scripts/Network/Protocol" \

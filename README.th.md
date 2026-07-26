@@ -15,7 +15,7 @@ Architecture สำหรับเกม Unity ที่ใช้ **Layered + MV
 | **Reactive** (UI, เมนู, คะแนน) | รอ input แล้วตอบ | `Presentation/`, `Domain/` |
 | **Simulation** (ศัตรู, กระสุน, ตัวละคร) | รันเองทุกเฟรม | `Actors/`, `ECS/` |
 
-สองฝั่งไม่เรียกกันตรงๆ — คุยผ่าน **Mediator (VitalRouter)** จุดเดียว · ข้ามจาก ECS มาฝั่ง managed ผ่านตัวแปลง **Bridge** (`SystemBase`) · `Network/` เป็นโมดูลถอดออกได้ (offline-first)
+สองฝั่งไม่เรียกกันตรงๆ — คุยผ่าน **Mediator (VitalRouter)** จุดเดียว · ข้ามจาก ECS มาฝั่ง managed ผ่านตัวแปลง **Bridge** (`SystemBase`) · `Network/` ซ่อน netcode library ไว้หลัง interface — เปลี่ยนตัวทีหลังไม่ต้องแก้ฝั่งที่เรียกใช้
 
 ---
 
@@ -111,7 +111,7 @@ Assets/_Project/
 │   ├── Reactors/       รับ event ทำ side effect (Audio, Camera)
 │   ├── Infrastructure/ ติดต่อโลกนอก (Save, Audio, Input)
 │   ├── Bootstrap/      DI registration + wiring
-│   └── Network/        โมดูล online ถอดได้ (เฉพาะ online) — Session/Bridges/Entities/Protocol/Transport
+│   └── Network/        โมดูล online สลับได้ (เฉพาะ online) — Session/Bridges/Entities/Protocol/Transport
 ├── Settings/           Rendering / Volumes (URP)
 ├── Data/               ScriptableObject instances (.asset)
 ├── Prefabs/            UI / Entities / Characters
@@ -133,7 +133,7 @@ Assets/_Project/
 2. `ECS/` มี asmdef แยก ไม่ reference R3/VitalRouter/UI → Burst-safe
 3. ข้าม ECS → managed ต้องผ่าน `ECS/Bridges/` (asmdef `_Project.ECS.Bridges`) เท่านั้น
 4. `interface` อยู่ `Domain/` · impl ที่ผูก engine อยู่ `Infrastructure/` หรือ `Network/`
-5. `using FishNet` (หรือ networking lib) ได้เฉพาะใน `Network/` · ไม่มีใครพึ่ง `Network/` กลับ → ถอดได้
+5. `using FishNet` (หรือ networking lib) ได้เฉพาะใน `Network/` · ไม่มีใครพึ่ง `Network/` กลับ → เปลี่ยน netcode ทีหลังแก้แค่ใน `Network/`
 6. Code (`.cs`) แยกจาก Asset (`.asset`/prefab/`.uxml`)
 
 > โครงนี้สร้างแค่ *folder* — ตัว `.asmdef` ต้องเพิ่มเองตามกฎด้านบน

@@ -15,7 +15,7 @@ A Unity game architecture built on **Layered + MVVM + Mediator (VitalRouter)**, 
 | **Reactive** (UI, menus, score) | waits for input, then responds | `Presentation/`, `Domain/` |
 | **Simulation** (enemies, bullets, characters) | runs every frame on its own | `Actors/`, `ECS/` |
 
-The two sides never call each other directly — they talk through a single **Mediator (VitalRouter)**. Crossing from ECS to the managed side goes through a **Bridge** (`SystemBase`). `Network/` is a removable module (offline-first).
+The two sides never call each other directly — they talk through a single **Mediator (VitalRouter)**. Crossing from ECS to the managed side goes through a **Bridge** (`SystemBase`). `Network/` hides the netcode library behind an interface, so swapping it out later never touches the calling side.
 
 ---
 
@@ -111,7 +111,7 @@ Assets/_Project/
 │   ├── Reactors/       react to events with side effects (Audio, Camera)
 │   ├── Infrastructure/ talk to the outside world (Save, Audio, Input)
 │   ├── Bootstrap/      DI registration + wiring
-│   └── Network/        removable online module (online only) — Session/Bridges/Entities/Protocol/Transport
+│   └── Network/        swappable online module (online only) — Session/Bridges/Entities/Protocol/Transport
 ├── Settings/           Rendering / Volumes (URP)
 ├── Data/               ScriptableObject instances (.asset)
 ├── Prefabs/            UI / Entities / Characters
@@ -133,7 +133,7 @@ Assets/_Project/
 2. `ECS/` has its own asmdef with no R3/VitalRouter/UI → Burst-safe
 3. Crossing ECS → managed must go through `ECS/Bridges/` (asmdef `_Project.ECS.Bridges`) only
 4. `interface` lives in `Domain/`; engine-bound implementations live in `Infrastructure/` or `Network/`
-5. `using FishNet` (or any networking lib) is allowed only inside `Network/`; nothing depends back on `Network/` → it stays removable
+5. `using FishNet` (or any networking lib) is allowed only inside `Network/`; nothing depends back on `Network/` → swapping netcode later only touches `Network/`
 6. Code (`.cs`) is separated from assets (`.asset` / prefab / `.uxml`)
 
 > This tool creates folders only — add the `.asmdef` files yourself per the rules above.
